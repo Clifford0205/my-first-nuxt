@@ -1,22 +1,7 @@
 <template>
   <div>
-    <input type="text" v-model="userId" />
-    <button @click="onLoadUser">Load User</button>
+    <p>請在上方輸入您的會員ID以及按下按鈕</p>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      userId: ""
-    };
-  },
-
-  methods: {
-    onLoadUser() {
-      this.$router.push("/users/" + this.userId);
-    }
-  }
-};
-</script>
+<script></script>
