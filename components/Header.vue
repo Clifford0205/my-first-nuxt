@@ -23,7 +23,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 80%;
+  width: 100%;
+  height: 100%;
   background-color: #ccc;
 }
 </style>
