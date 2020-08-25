@@ -23,7 +23,7 @@
 export default {
   asyncData(context, callback) {
     setTimeout(() => { 
-      callback(null, {
+      callback(null, { 
         loadedPost: {
           id: "1",
           title: `First Post (ID:${context.route.params.id})`,

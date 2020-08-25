@@ -12,40 +12,77 @@ export default {
     PostList
   },
 
-  asyncData(context) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          loadedPosts: [
-            {
-              id: "1",
-              title: "First Post",
-              previewText: "我的第一篇文章",
-              thumbnail: "https://i.imgur.com/0hThxqg.jpg"
-            },
+  // fetch(context) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve({
+  //         loadedPosts: [
+  //           {
+  //             id: "1",
+  //             title: "First Post",
+  //             previewText: "我的第一篇文章",
+  //             thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+  //           },
 
-            {
-              id: "2",
-              title: "Second Post",
-              previewText: "我的第二篇文章",
-              thumbnail: "https://i.imgur.com/0hThxqg.jpg"
-            }
-          ]
-        });
-      }, 1500);
-      // reject(new Error());
-    })
-      .then(data => {
-        return data;
-      })
-      .catch(e => {
-        context.error(e);
-      });
-  },
+  //           {
+  //             id: "2",
+  //             title: "Second Post",
+  //             previewText: "我的第二篇文章",
+  //             thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+  //           }
+  //         ]
+  //       });
+  //     }, 1500);
+  //     // reject(new Error());
+  //   })
+  //     .then(data => {
+  //       context.store.commit("setPosts", data.loadedPosts);
+  //     })
+  //     .catch(e => {
+  //       context.error(e);
+  //     });
+  // },
+
+  // asyncData(context) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve({
+  //         loadedPosts: [
+  //           {
+  //             id: "1",
+  //             title: "First Post",
+  //             previewText: "我的第一篇文章",
+  //             thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+  //           },
+
+  //           {
+  //             id: "2",
+  //             title: "Second Post",
+  //             previewText: "我的第二篇文章",
+  //             thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+  //           }
+  //         ]
+  //       });
+  //     }, 1500);
+  //     // reject(new Error());
+  //   })
+  //     .then(data => {
+  //       return data;
+  //     })
+  //     .catch(e => {
+  //       context.error(e);
+  //     });
+  // },
 
   created() {
     this.$store.dispatch("setPosts", this.loadedPosts);
     console.log(this.$store.getters.loadedPosts);
+  },
+
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
 };
 </script>

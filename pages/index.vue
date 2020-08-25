@@ -14,27 +14,33 @@ export default {
   components: {
     PostList
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPosts: [
-          {
-            id: "1",
-            title: "First Post",
-            previewText: "我的第一篇文章",
-            thumbnail: "https://i.imgur.com/0hThxqg.jpg"
-          },
 
-          {
-            id: "2",
-            title: "Second Post",
-            previewText: "我的第二篇文章",
-            thumbnail: "https://i.imgur.com/0hThxqg.jpg"
-          }
-        ]
-      });
-    }, 1500);
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
+  // asyncData(context, callback) {
+  //   setTimeout(() => {
+  //     callback(null, {
+  //       loadedPosts: [
+  //         {
+  //           id: "1",
+  //           title: "First Post",
+  //           previewText: "我的第一篇文章",
+  //           thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+  //         },
+
+  //         {
+  //           id: "2",
+  //           title: "Second Post",
+  //           previewText: "我的第二篇文章",
+  //           thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+  //         }
+  //       ]
+  //     });
+  //   }, 1500);
+  // }
 
   // data() {
   //   return {
