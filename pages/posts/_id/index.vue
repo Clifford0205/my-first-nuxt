@@ -1,13 +1,13 @@
 <template>
   <div class="single-post-page">
     <section class="past">
-      <h1 class="post-title">Title of the Post</h1>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last update on XXX</div>
-        <div class="post-detail">Written by NAME</div>
+        <div class="post-detail">{{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">{{ loadedPost.author }}</div>
       </div>
 
-      <p class="post-content">content of the post</p>
+      <p class="post-content">{{ loadedPost.content }}</p>
     </section>
 
     <div class="post-feedback">
@@ -18,6 +18,26 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  asyncData(context, callback) {
+    setTimeout(() => { 
+      callback(null, {
+        loadedPost: {
+          id: "1",
+          title: `First Post (ID:${context.route.params.id})`,
+          previewText: "我的第一篇文章",
+          author: "Clifford",
+          updatedDate: new Date(),
+          content: "這是一些假的內容",
+          thumbnail: "https://i.imgur.com/0hThxqg.jpg"
+        }
+      });
+    }, 1000);
+  }
+};
+</script>
 
 <style scoped>
 .single-post-page {
