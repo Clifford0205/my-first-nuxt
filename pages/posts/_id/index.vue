@@ -20,22 +20,10 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  asyncData(context, callback) {
-    setTimeout(() => { 
-      callback(null, { 
-        loadedPost: {
-          id: "1",
-          title: `First Post (ID:${context.route.params.id})`,
-          previewText: "我的第一篇文章",
-          author: "Clifford",
-          updatedDate: new Date(),
-          content: "這是一些假的內容",
-          thumbnail: "https://i.imgur.com/0hThxqg.jpg"
-        }
-      });
-    }, 1000);
-  }
+  asyncData(context, callback) {}
 };
 </script>
 
