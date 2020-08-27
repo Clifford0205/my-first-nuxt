@@ -16,10 +16,9 @@ export default {
   },
   methods: {
     onSubmitted(postData) {
-      axios
-        .post("https://nuxt-blog-9ecf3.firebaseio.com/posts.json", postData)
-        .then(result => console.log(result))
-        .catch(e => console.log(e));
+      this.$store.dispatch("addPost", postData).then(() => {
+        this.$router.push("/admin");
+      });
     }
   }
 };

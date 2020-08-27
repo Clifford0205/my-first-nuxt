@@ -74,10 +74,11 @@ export default {
   //     });
   // },
 
-  created() {
-    this.$store.dispatch("setPosts", this.loadedPosts);
-    console.log(this.$store.getters.loadedPosts);
-  },
+  // created() {
+  // asyncData才要用得狀態
+  //   this.$store.dispatch("setPosts", this.loadedPosts);
+  //   console.log(this.$store.getters.loadedPosts);
+  // },
 
   computed: {
     loadedPosts() {
