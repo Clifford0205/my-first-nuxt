@@ -16,6 +16,7 @@
 <script>
 import PostList from "@/components/Posts/PostList";
 import AppButton from "@/components/UI/AppButton";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -23,11 +24,7 @@ export default {
     AppButton
   },
 
-  computed: {
-    loadedPosts() {
-      return this.$store.getters.loadedPosts;
-    }
-  }
+  computed: { ...mapGetters(["loadedPosts"]) }
 };
 </script>
 

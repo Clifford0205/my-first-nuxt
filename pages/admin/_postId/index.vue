@@ -9,6 +9,7 @@
 <script>
 import AdminPostForm from "@/components/Admin/AdminPostForm";
 import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   layout: "admin",
@@ -28,11 +29,12 @@ export default {
           loadedPost: { ...res.data, id: context.params.postId }
         };
       })
-      .catch(e => context.console.error());
+      .catch(e => context.error());
   },
   methods: {
+    ...mapActions(["editPost"]),
     onSubmitted(editedPost) {
-      this.$store.dispatch("editPost", editedPost).then(() => {
+      this.editPost(editedPost).then(() => {
         this.$router.push("/admin");
       });
     }

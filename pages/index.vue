@@ -9,17 +9,19 @@
 
 <script>
 import PostList from "@/components/Posts/PostList";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     PostList
   },
 
-  computed: {
-    loadedPosts() {
-      return this.$store.getters.loadedPosts;
-    }
-  }
+  computed: { ...mapGetters(["loadedPosts"]) }
+  // computed: {
+  //   loadedPosts() {
+  //     return this.$store.getters.loadedPosts;
+  //   }
+  // }
   // asyncData(context, callback) {
   //   setTimeout(() => {
   //     callback(null, {

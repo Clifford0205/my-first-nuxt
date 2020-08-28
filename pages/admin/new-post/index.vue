@@ -9,16 +9,22 @@
 <script>
 import axios from "axios";
 import AdminPostForm from "@/components/Admin/AdminPostForm";
+import { mapActions } from "vuex";
 
 export default {
   components: {
     AdminPostForm
   },
   methods: {
+    ...mapActions(["addPost"]),
+
     onSubmitted(postData) {
-      this.$store.dispatch("addPost", postData).then(() => {
+      this.addPost(postData).then(() => {
         this.$router.push("/admin");
       });
+      // this.$store.dispatch("addPost", postData).then(() => {
+      //   this.$router.push("/admin");
+      // });
     }
   }
 };
