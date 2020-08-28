@@ -12,9 +12,14 @@ import axios from "axios";
 import { mapActions } from "vuex";
 
 export default {
-  layout: "admin",
   components: {
     AdminPostForm
+  },
+
+  data() {
+    return {
+      loadedPost: ""
+    };
   },
 
   asyncData(context) {
@@ -30,6 +35,21 @@ export default {
         };
       })
       .catch(e => context.error());
+  },
+
+  created() {
+    axios
+      .get(
+        "https://nuxt-blog-9ecf3.firebaseio.com/posts/" +
+          this.$route.params.postId +
+          ".json"
+      )
+      .then(res => {
+        return {
+          loadedPost: { ...res.data, id: this.$route.params.postId }
+        };
+      })
+      .catch(e => console.log(e));
   },
   methods: {
     ...mapActions(["editPost"]),

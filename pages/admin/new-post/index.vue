@@ -12,6 +12,7 @@ import AdminPostForm from "@/components/Admin/AdminPostForm";
 import { mapActions } from "vuex";
 
 export default {
+  
   components: {
     AdminPostForm
   },
