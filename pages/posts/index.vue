@@ -1,6 +1,6 @@
 <template>
   <div class="posts-page">
-    <PostList :posts="loadedPosts" />
+    <PostList :posts="myloadedPosts" />
   </div>
 </template>
 
@@ -83,7 +83,7 @@ export default {
 
   computed: {
     ...mapGetters(["loadedPosts"]),
-    loadedPosts() {
+    myloadedPosts() {
       return this.loadedPosts;
       // return this.$store.getters.loadedPosts;
     }

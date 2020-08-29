@@ -42,7 +42,7 @@ export const actions = {
       updatedDate: new Date()
     };
     return axios
-      .post("https://nuxt-blog-9ecf3.firebaseio.com/posts.json", createdPost)
+      .post(process.env.baseUrl + "/posts.json", createdPost)
       .then(res => {
         console.log(res);
         vuexContext.commit("addPost", {
@@ -55,9 +55,7 @@ export const actions = {
   editPost(vuexContext, editedPost) {
     return axios
       .put(
-        "https://nuxt-blog-9ecf3.firebaseio.com/posts/" +
-          editedPost.id +
-          ".json",
+        process.env.baseUrl + "/posts/" + editedPost.id + ".json",
         editedPost
       )
       .then(res => {
