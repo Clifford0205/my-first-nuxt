@@ -7,15 +7,10 @@
   </div>
 </template>
 
-<script>
-import PostList from "@/components/Posts/PostList";
+<script> 
 import { mapGetters } from "vuex";
 
 export default {
-  components: {
-    PostList
-  },
-
   computed: { ...mapGetters(["loadedPosts"]) }
   // computed: {
   //   loadedPosts() {

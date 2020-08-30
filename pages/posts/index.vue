@@ -5,14 +5,9 @@
 </template>
 
 <script>
-import PostList from "@/components/Posts/PostList";
 import { mapGetters } from "vuex";
 
 export default {
-  components: {
-    PostList
-  },
-
   // fetch(context) {
   //   return new Promise((resolve, reject) => {
   //     setTimeout(() => {

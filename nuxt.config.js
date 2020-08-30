@@ -40,7 +40,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ["~plugins/core-components.js", "~plugins/date-filter.js"],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -63,7 +63,14 @@ export default {
     baseUrl: process.env.BASE_URL || "https://nuxt-blog-9ecf3.firebaseio.com"
   },
 
-  generate:{
-    
-  }
+  router: {
+    linkActiveClass: "active"
+  },
+
+  pageTransition: {
+    name: "fade",
+    mode: "out-in"
+  },
+
+  generate: {}
 };
