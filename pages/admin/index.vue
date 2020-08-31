@@ -29,6 +29,7 @@ export default {
     onLogout() {
       console.log("有進來");
       this.logout();
+      this.$router.push("/admin/auth");
     }
   }
 };

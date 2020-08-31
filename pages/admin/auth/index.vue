@@ -29,7 +29,6 @@ import { mapActions } from "vuex";
 
 export default {
   name: "AdminAuthPage",
-  
   layout: "admin",
   components: {
     AppControlInput,
@@ -48,7 +47,7 @@ export default {
       this.authenticateUser({
         email: this.email,
         password: this.password,
-        returnSecureToken: true,
+        // returnSecureToken: true,
         isLogin: this.isLogin
       }).then(() => {
         this.$router.push("/admin");
