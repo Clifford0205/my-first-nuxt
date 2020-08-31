@@ -29,6 +29,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "AdminAuthPage",
+  
   layout: "admin",
   components: {
     AppControlInput,

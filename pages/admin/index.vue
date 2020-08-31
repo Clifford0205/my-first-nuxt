@@ -4,6 +4,10 @@
       <AppButton @click="$router.push({ name: 'admin-new-post' })">
         Create Post
       </AppButton>
+
+      <AppButton style="margin-left:10px" @click="onLogout">
+        Logout
+      </AppButton>
     </section>
 
     <section class="existing-posts">
@@ -14,12 +18,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   // layout: "admin",
-
-  computed: { ...mapGetters(["loadedPosts"]) }
+  middleware: ["check-auth", "auth"],
+  computed: { ...mapGetters(["loadedPosts"]) },
+  methods: {
+    ...mapActions(["logout"]),
+    onLogout() {
+      console.log("有進來");
+      this.logout();
+    }
+  }
 };
 </script>
 
