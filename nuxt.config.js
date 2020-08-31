@@ -60,11 +60,13 @@ export default {
    */
   build: {},
   env: {
-    baseUrl: process.env.BASE_URL || "https://nuxt-blog-9ecf3.firebaseio.com"
+    baseUrl: process.env.BASE_URL || "https://nuxt-blog-9ecf3.firebaseio.com",
+    fbAPIKey: "AIzaSyD2n3E-2c9mw2JTTOLUQUnps3OmIsHMHWQ"
   },
 
   router: {
-    linkActiveClass: "active"
+    linkActiveClass: "active",
+    middleware: "log"
   },
 
   pageTransition: {

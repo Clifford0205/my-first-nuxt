@@ -75,7 +75,7 @@ export default {
   //   this.$store.dispatch("setPosts", this.loadedPosts);
   //   console.log(this.$store.getters.loadedPosts);
   // },
-
+  // middleware: "log",
   computed: {
     ...mapGetters(["loadedPosts"]),
     myloadedPosts() {
