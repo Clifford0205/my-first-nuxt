@@ -2,7 +2,7 @@
   <div>
     <TheHeader @sidenavToggle="displaySidenav = !displaySidenav" />
     <TheSidenav :show="displaySidenav" @close="displaySidenav = false" />
-    <Nuxt />
+    <nuxt />
   </div>
 </template>
 

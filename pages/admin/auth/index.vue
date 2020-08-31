@@ -22,18 +22,13 @@
 </template>
 
 <script>
-import AppControlInput from "@/components/UI/AppControlInput";
-import AppButton from "@/components/UI/AppButton";
 import axios from "axios";
 import { mapActions } from "vuex";
 
 export default {
   name: "AdminAuthPage",
   layout: "admin",
-  components: {
-    AppControlInput,
-    AppButton
-  },
+
   data() {
     return {
       isLogin: true,

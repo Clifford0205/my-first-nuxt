@@ -74,5 +74,10 @@ export default {
     mode: "out-in"
   },
 
+  layoutTransition: {
+    name: "fade",
+    mode: "out-in"
+  },
+
   generate: {}
 };
