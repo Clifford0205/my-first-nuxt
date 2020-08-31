@@ -25,6 +25,7 @@
 import AppControlInput from "@/components/UI/AppControlInput";
 import AppButton from "@/components/UI/AppButton";
 import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: "AdminAuthPage",
@@ -41,25 +42,16 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["authenticateUser"]),
     onSubmit() {
-      let authUrl =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
-        process.env.fbAPIKey;
-      if (!this.isLogin) {
-        authUrl =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
-          process.env.fbAPIKey;
-      }
-      axios
-        .post(authUrl, {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true
-        })
-        .then(result => {
-          console.log(result);
-        })
-        .catch(e => console.log(e));
+      this.authenticateUser({
+        email: this.email,
+        password: this.password,
+        returnSecureToken: true,
+        isLogin: this.isLogin
+      }).then(() => {
+        this.$router.push("/admin");
+      });
     }
   }
 };
