@@ -1,3 +1,4 @@
+const bodyParser = require("body-parser");
 export default {
   /*
    ** Nuxt rendering mode
@@ -79,5 +80,5 @@ export default {
     mode: "out-in"
   },
 
-  generate: {}
+  serverMiddleware: [bodyParser.json(), "~/api"]
 };

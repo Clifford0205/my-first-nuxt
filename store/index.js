@@ -111,6 +111,9 @@ export const actions = {
           "expirationDate",
           new Date().getTime() + Number.parseInt(result.data.expiresIn) * 1000
         );
+        return axios.post("http://localhost:3000/api/track-data", {
+          data: "Authenticated!"
+        });
       })
       .catch(e => console.log(e));
   },
@@ -149,13 +152,11 @@ export const actions = {
   },
 
   logout(vuexContext) {
-    console.log("有進來2");
     vuexContext.commit("clearToken");
     Cookie.remove("jwt");
     Cookie.remove("expirationDate");
 
     if (process.client) {
-      console.log("有進來3");
       localStorage.removeItem("token");
       localStorage.removeItem("tokenExpiration");
     }

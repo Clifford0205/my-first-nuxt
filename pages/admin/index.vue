@@ -26,8 +26,7 @@ export default {
   computed: { ...mapGetters(["loadedPosts"]) },
   methods: {
     ...mapActions(["logout"]),
-    onLogout() {
-      console.log("有進來");
+    onLogout() { 
       this.logout();
       this.$router.push("/admin/auth");
     }
