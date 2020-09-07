@@ -1,4 +1,5 @@
 const bodyParser = require("body-parser");
+const axios = require("axios");
 export default {
   /*
    ** Nuxt rendering mode
@@ -80,5 +81,22 @@ export default {
     mode: "out-in"
   },
 
-  serverMiddleware: [bodyParser.json(), "~/api"]
+  serverMiddleware: [bodyParser.json(), "~/api"],
+
+  generate: {
+    routes: function() {
+      return axios
+        .get("https://nuxt-blog-9ecf3.firebaseio.com/posts.json")
+        .then(res => {
+          const routes = [];
+          for (const key in res.data) {
+            routes.push({
+              route: "/posts/" + key,
+              payload: { postData: res.data[key] }
+            });
+          }
+          return routes;
+        });
+    }
+  }
 };

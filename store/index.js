@@ -37,6 +37,8 @@ export const actions = {
       .then(res => {
         const postsArray = [];
         for (const key in res.data) {
+          console.log("res.data", res.data);
+          console.log("key", key);
           postsArray.push({ ...res.data[key], id: key });
         }
         vuexContext.commit("setPosts", postsArray);
@@ -138,7 +140,7 @@ export const actions = {
         .split(";")
         .find(c => c.trim().startsWith("expirationDate="))
         .split("=")[1];
-    } else {
+    } else if (process.client) {
       token = localStorage.getItem("token");
       expirationDate = localStorage.getItem("tokenExpiration");
     }
