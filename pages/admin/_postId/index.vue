@@ -17,18 +17,13 @@ export default {
     AdminPostForm
   },
 
-  data() {
-    return {
-      loadedPost: ""
-    };
-  },
-
   asyncData(context) {
-    if (context.payload) {
-      return {
-        loadedPost: context.payload.postData
-      };
-    }
+    // if (context.payload) {
+    //   return {
+    //     loadedPost: context.payload.postData
+    //   };
+    // }
+    // 上面這段是在 nuxt.config裡面generate一開使就有打api產生靜態頁面 就不用再打一次了
     return axios
       .get(process.env.baseUrl + "/posts/" + context.params.postId + ".json")
       .then(res => {
@@ -39,18 +34,6 @@ export default {
       .catch(e => context.error());
   },
 
-  created() {
-    axios
-      .get(
-        process.env.baseUrl + "/posts/" + this.$route.params.postId + ".json"
-      )
-      .then(res => {
-        return {
-          loadedPost: { ...res.data, id: this.$route.params.postId }
-        };
-      })
-      .catch(e => console.log(e));
-  },
   methods: {
     ...mapActions(["editPost"]),
     onSubmitted(editedPost) {

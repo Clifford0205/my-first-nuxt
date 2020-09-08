@@ -37,8 +37,8 @@ export const actions = {
       .then(res => {
         const postsArray = [];
         for (const key in res.data) {
-          console.log("res.data", res.data);
-          console.log("key", key);
+          // console.log("res.data", res.data);
+          // console.log("key", key);
           postsArray.push({ ...res.data[key], id: key });
         }
         vuexContext.commit("setPosts", postsArray);
@@ -101,7 +101,7 @@ export const actions = {
         returnSecureToken: true
       })
       .then(result => {
-        console.log(result);
+        // console.log(result);
         vuexContext.commit("setToken", result.data.idToken);
         localStorage.setItem("token", result.data.idToken);
         localStorage.setItem(
