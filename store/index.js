@@ -1,5 +1,13 @@
 import axios from "axios";
 import Cookie from "js-cookie";
+import {
+  getTokenFromLocal,
+  getExpirationDateFromLocal,
+  getTokenFromCookie,
+  getExpirationDateFromCookie,
+  setTokenOnWeb,
+  setExpirationDateOnWeb
+} from "@/store/utils/user.js";
 
 export const state = () => ({
   loadedPosts: [],
@@ -65,6 +73,7 @@ export const actions = {
       })
       .catch(e => console.log(e));
   },
+
   editPost(vuexContext, editedPost) {
     return axios
       .put(
@@ -81,14 +90,17 @@ export const actions = {
       .catch(err => console.log(err));
   },
 
-  setPosts(vuexContext, posts) {
-    vuexContext.commit("setPosts", posts);
-  },
+  // setPosts(vuexContext, posts) {
+  //   vuexContext.commit("setPosts", posts);
+  // },
 
   authenticateUser(vuexContext, authData) {
+    // 登入的URL
     let authUrl =
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
       process.env.fbAPIKey;
+
+    // 註冊的URL
     if (!authData.isLogin) {
       authUrl =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
@@ -103,49 +115,36 @@ export const actions = {
       .then(result => {
         // console.log(result);
         vuexContext.commit("setToken", result.data.idToken);
-        localStorage.setItem("token", result.data.idToken);
-        localStorage.setItem(
-          "tokenExpiration",
+        setTokenOnWeb(result.data.idToken);
+        setExpirationDateOnWeb(
           new Date().getTime() + Number.parseInt(result.data.expiresIn) * 1000
         );
-        Cookie.set("jwt", result.data.idToken);
-        Cookie.set(
-          "expirationDate",
-          new Date().getTime() + Number.parseInt(result.data.expiresIn) * 1000
-        );
+
         return axios.post("http://localhost:3000/api/track-data", {
           data: "Authenticated!"
         });
       })
       .catch(e => console.log(e));
   },
+
   initAuth(vuexContext, req) {
     let token;
     let expirationDate;
+    // 要是是server端
     if (req) {
+      console.log("近來server");
       if (!req.headers.cookie) {
         return;
       }
-      const jwtCookie = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("jwt="));
-
-      if (!jwtCookie) {
-        return;
-      }
-
-      token = jwtCookie.split("=")[1];
-
-      expirationDate = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("expirationDate="))
-        .split("=")[1];
+      token = getTokenFromCookie(req.headers.cookie);
+      expirationDate = getExpirationDateFromCookie(req.headers.cookie);
     } else if (process.client) {
-      token = localStorage.getItem("token");
-      expirationDate = localStorage.getItem("tokenExpiration");
+      // 要是是client端
+      token = getTokenFromLocal();
+      expirationDate = getExpirationDateFromLocal();
     }
 
-    if (new Date().getTime() > +expirationDate || !token) {
+    if (new Date().getTime() > expirationDate || !token) {
       console.log("No token or invalid token");
       vuexContext.dispatch("logout");
       return;
@@ -169,6 +168,7 @@ export const getters = {
   loadedPosts(state) {
     return state.loadedPosts;
   },
+
   isAuthenticated(state) {
     return state.token != null;
   }
