@@ -23,10 +23,17 @@ export default {
     //     loadedPost: context.payload.postData
     //   };
     // }
-    // 上面這段是在 nuxt.config裡面generate一開使就有打api產生靜態頁面 就不用再打一次了
+    // 上面這段是在 nuxt.config裡面generate一開使就有打api產生靜態頁面 就不用再打一次api了
     return axios
       .get(process.env.baseUrl + "/posts/" + context.params.postId + ".json")
       .then(res => {
+        if (process.client) {
+          console.log("本地端運行");
+        }
+        if (process.server) {
+          console.log("伺服器端運行");
+        }
+
         return {
           loadedPost: { ...res.data, id: context.params.postId }
         };
