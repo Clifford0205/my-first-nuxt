@@ -26,20 +26,49 @@ export default {
     //   };
     // }
     // 上面這段是在 nuxt.config裡面generate一開使就有打api產生靜態頁面 就不用再打一次api了
-    let data = callApi({
+
+    let promiseData = callApi({
       url: "/posts/" + context.params.postId + ".json",
       method: "get"
     });
-    console.log("data", data);
-    return {
-      loadedPost: {
-        ...callApi({
-          url: "/posts/" + context.params.postId + ".json",
-          method: "get"
-        }),
-        id: context.params.postId
-      }
-    };
+
+    console.log("data", promiseData);
+
+    return promiseData
+      .then(data => {
+        console.log("裡面", data);
+        return {
+          loadedPost: { ...data, id: context.params.postId }
+        };
+      })
+      .catch(function(error) {
+        console.log("裡面", error);
+        console.log("裡面", error.message);
+      });
+
+    // var SaveData = function() {
+    //   return promiseData
+    //     .then(data => {
+    //       console.log("裡面", data);
+    //       return {
+    //         loadedPost: { ...data, id: context.params.postId }
+    //       };
+    //     })
+    //     .catch(function(error) {
+    //       console.log("裡面", error);
+    //       console.log("裡面", error.message);
+    //     });
+    // };
+    // SaveData();
+    // return {
+    //   loadedPost: {
+    //     ...callApi({
+    //       url: "/posts/" + context.params.postId + ".json",
+    //       method: "get"
+    //     }),
+    //     id: context.params.postId
+    //   }
+    // };
 
     // callApi({
     //   url: "/posts/" + context.params.postId + ".json",

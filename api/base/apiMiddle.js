@@ -41,9 +41,7 @@ const debounceErrorAlert = _.debounce(() => {
 }, 500);
 
 export default ({ method, url, data, displayLoading = true }) => {
-  console.log(url);
-  console.log($nuxt.context.$axios["$" + method]);
-
+ 
   //   let isStillGetting = _.get(apiStatus, url, false);
   //   if (isStillGetting) {
   //     return;
@@ -53,11 +51,10 @@ export default ({ method, url, data, displayLoading = true }) => {
   //   toggleLoading(true, displayLoading);
   let resData;
 
-  $nuxt.context.$axios["$" + method](url, data).then(res => {
+  return $nuxt.context.$axios["$" + method](url, data).then(res => {
     console.log("res", res);
-    this.resData = res;
+    resData = res;
+    console.log("xxx", resData);
+    return resData;
   });
-
-  console.log("xxx", resData);
-  return resData;
 };
