@@ -25,8 +25,8 @@ export default {
   middleware: ["check-auth", "auth"],
   computed: { ...mapGetters(["loadedPosts"]) },
   methods: {
-    ...mapActions(["logout"]),
-    onLogout() { 
+    ...mapActions("user", ["logout"]),
+    onLogout() {
       this.logout();
       this.$router.push("/admin/auth");
     }

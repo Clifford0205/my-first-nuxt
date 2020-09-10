@@ -1,8 +1,8 @@
-import { getStorage, setStorage } from "./storage";
+import { getStorage, setStorage, removeStorage } from "./storage";
 import Cookie from "js-cookie";
 import _ from "lodash";
 
-// 從LocalStorage 拿Token
+// 從LocalStorage 拿token
 export let getTokenFromLocal = () => {
   let token = getStorage("token");
 
@@ -13,7 +13,7 @@ export let getTokenFromLocal = () => {
   return token;
 };
 
-// 從LocalStorage 拿Token過期時間
+// 從LocalStorage 拿token過期時間
 export let getExpirationDateFromLocal = () => {
   let expirationDate = getStorage("tokenExpiration");
   if (!_.isNumber(expirationDate)) {
@@ -22,7 +22,7 @@ export let getExpirationDateFromLocal = () => {
   return expirationDate;
 };
 
-// 從server端 cookie 拿Token
+// 從server端 cookie 拿token
 export let getTokenFromCookie = cookie => {
   let token;
   const jwtCookie = cookie.split(";").find(c => c.trim().startsWith("jwt="));
@@ -40,7 +40,7 @@ export let getTokenFromCookie = cookie => {
   return token;
 };
 
-// 從server端 cookie拿Token過期時間
+// 從server端 cookie拿token過期時間
 export let getExpirationDateFromCookie = cookie => {
   let expirationDate = cookie
     .split(";")
@@ -53,13 +53,33 @@ export let getExpirationDateFromCookie = cookie => {
   return expirationDate;
 };
 
-// 把Token設定至 LocalStorage 和 server端 cookie
+// 把token設定至 LocalStorage 和 server端 cookie
 export let setTokenOnWeb = token => {
   setStorage("token", token);
   Cookie.set("jwt", token);
 };
-// 把Token過期時間設定至 LocalStorage 和 server端 cookie
+// 把token過期時間設定至 LocalStorage 和 server端 cookie
 export let setExpirationDateOnWeb = expirationDate => {
   setStorage("tokenExpiration", expirationDate);
   Cookie.set("expirationDate", expirationDate);
+};
+
+// 移除LocalStorage的token
+export let removeTokenFromLocal = () => {
+  removeStorage("token");
+};
+
+// 移除LocalStorage的token過期時間
+export let removeExpirationDateFromLocal = () => {
+  removeStorage("tokenExpiration");
+};
+
+// 從server端 cookie 移除 token
+export let removeTokenFromCookie = () => {
+  Cookie.remove("jwt");
+};
+
+// 從server端 cookie 移除 token過期時間
+export let removeExpirationDateFromCookie = () => {
+  Cookie.remove("expirationDate");
 };

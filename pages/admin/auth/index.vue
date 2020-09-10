@@ -37,7 +37,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["authenticateUser"]),
+    ...mapActions("user", ["authenticateUser"]),
     onSubmit() {
       this.authenticateUser({
         email: this.email,

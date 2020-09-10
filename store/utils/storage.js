@@ -9,3 +9,7 @@ export let getStorage = key => {
 export let setStorage = (key, value) => {
   return storage.set(key, value);
 };
+
+export let removeStorage = key => {
+  return storage.remove(key);
+};
