@@ -10,6 +10,7 @@
     "deploy": "nuxt build && npm start"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.12.2",
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
