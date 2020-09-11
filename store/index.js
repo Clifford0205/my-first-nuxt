@@ -11,7 +11,6 @@ export const mutations = {
   },
 
   addPost(state, post) {
-    console.log("mutation", post);
     state.loadedPosts.push(post);
   },
 
@@ -25,14 +24,14 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit(vuexContext, context) {
-    return axios
-      .get(process.env.baseUrl + "/posts.json")
+    return postApi
+      .getAllPost()
       .then(res => {
         const postsArray = [];
-        for (const key in res.data) {
+        for (const key in res) {
           // console.log("res.data", res.data);
           // console.log("key", key);
-          postsArray.push({ ...res.data[key], id: key });
+          postsArray.push({ ...res[key], id: key });
         }
         vuexContext.commit("setPosts", postsArray);
       })

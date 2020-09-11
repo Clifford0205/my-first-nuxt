@@ -1,17 +1,18 @@
-import api from "./base/api";
+import callApi from "./base/apiUser";
 
-export function login({ account, password }, cb, errCb) {
-  const config = {
-    data: {
-      account,
-      password
-    }
-  };
-  return request({
-    url: "login",
-    method: "post",
-    cb,
-    errCb,
-    config
-  });
-}
+export default {
+  loginAndRegister({ email, password, returnSecureToken, authUrl }) {
+    const config = {
+      data: {
+        email,
+        password,
+        returnSecureToken
+      }
+    };
+    return callApi({
+      method: "post",
+      config,
+      baseURL: authUrl
+    });
+  }
+};

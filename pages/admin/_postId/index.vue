@@ -8,7 +8,6 @@
 
 <script>
 import AdminPostForm from "@/components/Admin/AdminPostForm";
-import axios from "axios";
 import postApi from "@/api/post";
 import { mapActions } from "vuex";
 

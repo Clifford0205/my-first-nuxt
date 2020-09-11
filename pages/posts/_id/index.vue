@@ -20,18 +20,22 @@
 </template>
 
 <script>
-import axios from "axios";
+import postApi from "@/api/post";
 
 export default {
   asyncData(context) {
-    return axios
-      .get(process.env.baseUrl + "/posts/" + context.params.id + ".json")
+    return postApi
+      .getOnePost({
+        postId: context.params.id
+      })
       .then(res => {
         return {
-          loadedPost: res.data
+          loadedPost: res
         };
       })
-      .catch(e => context.error(e));
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 };
 </script>
