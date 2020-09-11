@@ -58,26 +58,13 @@ export const actions = {
   },
 
   editPost(vuexContext, editedPost) {
-    // return postApi
-    //   .editPost({
-    //     post: editedPost,
-    //     userToken: vuexContext.state.user.token
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     vuexContext.commit("editPost", editedPost);
-    //   })
-    //   .catch(err => console.log(err));
-    return axios
-      .put(
-        process.env.baseUrl +
-          "/posts/" +
-          editedPost.id +
-          ".json?auth=" +
-          vuexContext.state.user.token,
-        editedPost
-      )
+    return postApi
+      .editPost({
+        post: editedPost,
+        userToken: vuexContext.state.user.token
+      })
       .then(res => {
+        console.log(res);
         vuexContext.commit("editPost", editedPost);
       })
       .catch(err => console.log(err));

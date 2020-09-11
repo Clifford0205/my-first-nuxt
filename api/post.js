@@ -30,14 +30,15 @@ export default {
   },
 
   editPost({ post, userToken }) {
+    console.log(post);
     const config = {
       data: {
-        post
+        ...post
       }
     };
     return callApi({
       url: `/posts/${post.id}.json?auth=${userToken}`,
-      method: "post",
+      method: "put",
       config
     });
   }
