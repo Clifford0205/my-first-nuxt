@@ -1,5 +1,7 @@
 import axios from "axios";
+// import userApi from "@/api/user";
 import Cookie from "js-cookie";
+import userApi from "@/api/user";
 import {
   getTokenFromLocal,
   getExpirationDateFromLocal,
@@ -39,18 +41,18 @@ export const actions = {
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
         process.env.fbAPIKey;
     }
-    return axios
-      .post(authUrl, {
+    return userApi
+      .loginAndRegister({
         email: authData.email,
         password: authData.password,
-        returnSecureToken: true
+        returnSecureToken: true,
+        authUrl
       })
-      .then(result => {
-        // console.log(result);
-        vuexContext.commit("setToken", result.data.idToken);
-        setTokenOnWeb(result.data.idToken);
+      .then(res => {
+        vuexContext.commit("setToken", res.idToken);
+        setTokenOnWeb(res.idToken);
         setExpirationDateOnWeb(
-          new Date().getTime() + Number.parseInt(result.data.expiresIn) * 1000
+          new Date().getTime() + Number.parseInt(res.expiresIn) * 1000
         );
 
         return axios.post("http://localhost:3000/api/track-data", {

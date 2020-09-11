@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookie from "js-cookie";
+import postApi from "@/api/post";
 
 export const state = () => ({
   loadedPosts: []
@@ -24,14 +24,14 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit(vuexContext, context) {
-    return axios
-      .get(process.env.baseUrl + "/posts.json")
+    return postApi
+      .getAllPost()
       .then(res => {
         const postsArray = [];
-        for (const key in res.data) {
+        for (const key in res) {
           // console.log("res.data", res.data);
           // console.log("key", key);
-          postsArray.push({ ...res.data[key], id: key });
+          postsArray.push({ ...res[key], id: key });
         }
         vuexContext.commit("setPosts", postsArray);
       })
@@ -39,38 +39,32 @@ export const actions = {
   },
 
   addPost(vuexContext, post) {
-    const createdPost = {
-      ...post,
-      updatedDate: new Date()
-    };
-    return axios
-      .post(
-        process.env.baseUrl +
-          "/posts.json?auth=" +
-          vuexContext.state.user.token,
-        createdPost
-      )
+    return postApi
+      .addPost({
+        post: post,
+        updatedDate: new Date(),
+        userToken: vuexContext.state.user.token
+      })
       .then(res => {
-        // console.log(res);
         vuexContext.commit("addPost", {
-          ...createdPost,
-          id: res.data.name
+          ...post,
+          updatedDate: new Date(),
+          id: res.name
         });
       })
-      .catch(e => console.log(e));
+      .catch(function(error) {
+        console.log(error);
+      });
   },
 
   editPost(vuexContext, editedPost) {
-    return axios
-      .put(
-        process.env.baseUrl +
-          "/posts/" +
-          editedPost.id +
-          ".json?auth=" +
-          vuexContext.state.user.token,
-        editedPost
-      )
+    return postApi
+      .editPost({
+        post: editedPost,
+        userToken: vuexContext.state.user.token
+      })
       .then(res => {
+        console.log(res);
         vuexContext.commit("editPost", editedPost);
       })
       .catch(err => console.log(err));

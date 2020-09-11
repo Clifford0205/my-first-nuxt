@@ -45,7 +45,8 @@ export default {
   plugins: [
     "~plugins/core-components.js",
     "~plugins/date-filter.js",
-    "~plugins/axios.js"
+    "~plugins/axios.js",
+    "~plugins/authorization.js"
   ],
   /*
    ** Auto import components
