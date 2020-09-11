@@ -1,9 +1,8 @@
-import store from '@/store';
-
 export default (headers = {}) => {
+  // console.log($nuxt.$store.getters["user/token"]);
   return {
     headers: {
-      Authorization: `${store.getters['user/token']}`,
+      Authorization: $nuxt.$store.getters["user/token"],
       ...headers
     }
   };

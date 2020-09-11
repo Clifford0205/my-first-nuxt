@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookie from "js-cookie";
+import postApi from "@/api/post";
 
 export const state = () => ({
   loadedPosts: []
@@ -11,6 +11,7 @@ export const mutations = {
   },
 
   addPost(state, post) {
+    console.log("mutation", post);
     state.loadedPosts.push(post);
   },
 
@@ -39,28 +40,35 @@ export const actions = {
   },
 
   addPost(vuexContext, post) {
-    const createdPost = {
-      ...post,
-      updatedDate: new Date()
-    };
-    return axios
-      .post(
-        process.env.baseUrl +
-          "/posts.json?auth=" +
-          vuexContext.state.user.token,
-        createdPost
-      )
+    return postApi
+      .addPost({
+        post: post,
+        updatedDate: new Date(),
+        userToken: vuexContext.state.user.token
+      })
       .then(res => {
-        // console.log(res);
         vuexContext.commit("addPost", {
-          ...createdPost,
-          id: res.data.name
+          ...post,
+          updatedDate: new Date(),
+          id: res.name
         });
       })
-      .catch(e => console.log(e));
+      .catch(function(error) {
+        console.log(error);
+      });
   },
 
   editPost(vuexContext, editedPost) {
+    // return postApi
+    //   .editPost({
+    //     post: editedPost,
+    //     userToken: vuexContext.state.user.token
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //     vuexContext.commit("editPost", editedPost);
+    //   })
+    //   .catch(err => console.log(err));
     return axios
       .put(
         process.env.baseUrl +

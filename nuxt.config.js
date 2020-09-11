@@ -42,7 +42,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ["~plugins/core-components.js", "~plugins/date-filter.js"],
+  plugins: [
+    "~plugins/core-components.js",
+    "~plugins/date-filter.js",
+    "~plugins/axios.js"
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -55,7 +59,11 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/axios"],
+  axios: {
+    // baseURL: process.env.BASE_URL || "https://nuxt-blog-9ecf3.firebaseio.com",
+    credentials: false
+  },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
