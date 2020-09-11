@@ -4,13 +4,22 @@ import Vue from "vue";
 // import store from "@/store";
 // import router from "@/router";
 // Import component
-// import Loading from "vue-loading-overlay";
+
+import Loading from "vue-loading-overlay";
+
 // Import stylesheet
-// import "vue-loading-overlay/dist/vue-loading.css";
-// import authorization from "./authorization";
+import "vue-loading-overlay/dist/vue-loading.css";
+import authorization from "./authorization";
 
 // Init plugin
-// Vue.use(Loading, { loader: "bars", color: "#8a4fdf", height: 128, width: 128 });
+if (process.client) {
+  Vue.use(Loading, {
+    loader: "bars",
+    color: "#8a4fdf",
+    height: 128,
+    width: 128
+  });
+}
 
 let apiStatus = {};
 
@@ -18,28 +27,30 @@ let loadingCount = 0;
 
 let loader;
 
-// const toggleLoading = (display, displayLoading) => {
-//   if (!displayLoading) return;
+const toggleLoading = (display, displayLoading) => {
+  if (!displayLoading) return;
 
-//   if (display) {
-//     loadingCount++;
-//   } else {
-//     loadingCount--;
-//   }
+  if (display) {
+    loadingCount++;
+  } else {
+    loadingCount--;
+  }
 
-//   if (loadingCount > 0) {
-//     if (!loader) {
-//       loader = Vue.$loading.show();
-//     }
-//   } else {
-//     loadingCount = 0;
-//     if (loader === undefined) {
-//       return;
-//     }
-//     loader.hide();
-//     loader = undefined;
-//   }
-// };
+  if (process.client) {
+    if (loadingCount > 0) {
+      if (!loader) {
+        loader = Vue.$loading.show();
+      }
+    } else {
+      loadingCount = 0;
+      if (loader === undefined) {
+        return;
+      }
+      loader.hide();
+      loader = undefined;
+    }
+  }
+};
 
 const debounceErrorAlert = _.debounce(() => {
   alert("伺服器連線異常");
@@ -57,19 +68,19 @@ export default ({ method, url, config, errCb, displayLoading, baseURL }) => {
   let defaultConfig = {
     baseURL,
     method,
-    url
-    // ...authorization()
+    url,
+    ...authorization()
   };
 
   let usingConfig = Object.assign(defaultConfig, config);
 
-  // toggleLoading(true, displayLoading);
+  toggleLoading(true, displayLoading);
 
   return axios(usingConfig)
     .then(response => {
       _.unset(apiStatus, url);
 
-      // toggleLoading(false, displayLoading);
+      toggleLoading(false, displayLoading);
 
       // const code = _.get(response, "data.status.code");
 
@@ -84,7 +95,7 @@ export default ({ method, url, config, errCb, displayLoading, baseURL }) => {
     .catch(error => {
       _.unset(apiStatus, url);
 
-      // toggleLoading(false, displayLoading);
+      toggleLoading(false, displayLoading);
 
       // eslint-disable-next-line no-console
       console.error(error);
