@@ -103,7 +103,7 @@ export default ({
       const code = _.get(error, "response.data.status.code");
 
       if (status == 401) {
-        $nuxt.$router.push("index");
+        // $nuxt.$router.push("index");
         return;
       }
 

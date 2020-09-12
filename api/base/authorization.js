@@ -1,17 +1,19 @@
 // import store from "~store";
 // import router from "~router";
 
-export default (headers = {}) => {
-  if (process.client) {
-    console.log($nuxt.$store);
-  }
+export default ({ context, headers = {} }) => {
+  let authorization;
 
   if (process.server) {
-    console.log($nuxt);
+    authorization = context.store.getters["user/token"];
   }
+  if (process.client) {
+    authorization = $nuxt.$store.getters["user/token"];
+  }
+
   return {
     headers: {
-      // Authorization: $nuxt.$store.getters["user/token"],
+      Authorization: authorization,
       ...headers
     }
   };

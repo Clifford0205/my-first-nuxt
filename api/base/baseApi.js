@@ -56,7 +56,7 @@ const debounceErrorAlert = _.debounce(() => {
   alert("伺服器連線異常");
 }, 500);
 
-export default ({ method, url, config, errCb, displayLoading, baseURL }) => {
+export default ({ method, url, config, displayLoading, baseURL, context }) => {
   let isStillGetting = _.get(apiStatus, url, false);
 
   if (isStillGetting) {
@@ -69,7 +69,7 @@ export default ({ method, url, config, errCb, displayLoading, baseURL }) => {
     baseURL,
     method,
     url,
-    ...authorization()
+    ...authorization({ context })
   };
 
   let usingConfig = Object.assign(defaultConfig, config);

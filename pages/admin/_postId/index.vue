@@ -27,7 +27,8 @@ export default {
 
     return postApi
       .getOnePost({
-        postId: context.params.postId
+        postId: context.params.postId,
+        context
       })
       .then(data => {
         return {

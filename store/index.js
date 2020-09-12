@@ -25,7 +25,7 @@ export const mutations = {
 export const actions = {
   nuxtServerInit(vuexContext, context) {
     return postApi
-      .getAllPost()
+      .getAllPost(context)
       .then(res => {
         const postsArray = [];
         for (const key in res) {
