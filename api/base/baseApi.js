@@ -57,6 +57,12 @@ const debounceErrorAlert = _.debounce(() => {
 }, 500);
 
 export default ({ method, url, config, displayLoading, baseURL, context }) => {
+  if (process.server) {
+    console.log(context.route);
+  }
+  if (process.client) {
+    console.log($nuxt.$router);
+  }
   let isStillGetting = _.get(apiStatus, url, false);
 
   if (isStillGetting) {
@@ -103,6 +109,8 @@ export default ({ method, url, config, displayLoading, baseURL, context }) => {
       const status = _.get(error, "response.status");
 
       const code = _.get(error, "response.data.status.code");
+
+      console.log(error);
 
       if (status == 401) {
         $nuxt.$router.push("index");
