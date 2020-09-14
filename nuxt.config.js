@@ -82,11 +82,18 @@ export default {
     linkActiveClass: "active",
     middleware: "log",
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: "首頁",
-        path: "/",
-        component: resolve(__dirname, "pages/index.vue")
-      });
+      routes.push(
+        {
+          name: "首頁",
+          path: "/",
+          component: resolve(__dirname, "pages/index.vue")
+        },
+        {
+          name: "會員頁",
+          path: "/admin",
+          component: resolve(__dirname, "pages/admin/index.vue")
+        }
+      );
     }
   },
 

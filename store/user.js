@@ -49,9 +49,8 @@ export const actions = {
         authUrl
       })
       .then(res => {
-        console.log(res);
         if (res) {
-          $nuxt.$router.push("/admin");
+          $nuxt.$router.push({ name: "會員頁" });
         }
         vuexContext.commit("setToken", res.idToken);
         setTokenOnWeb(res.idToken);
@@ -65,8 +64,6 @@ export const actions = {
       })
       .catch(e => {
         console.log(e);
-        console.log($nuxt.$router);
-        console.log($nuxt._router);
         // $nuxt.$router.push({ name: "index" });
       });
   },

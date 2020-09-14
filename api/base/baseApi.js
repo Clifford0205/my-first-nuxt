@@ -57,11 +57,16 @@ const debounceErrorAlert = _.debounce(() => {
 }, 500);
 
 export default ({ method, url, config, displayLoading, baseURL, context }) => {
+  let routeTo;
   if (process.server) {
-    // console.log(context.route);
+    routeTo = routeName => {
+      context.redirect({ name: routeName });
+    };
   }
   if (process.client) {
-    // console.log($nuxt.$router);
+    routeTo = routeName => {
+      $nuxt.$router.push({ name: routeName });
+    };
   }
   let isStillGetting = _.get(apiStatus, url, false);
 
@@ -113,13 +118,9 @@ export default ({ method, url, config, displayLoading, baseURL, context }) => {
       console.log(status);
 
       if (status == 400) {
-        console.log($nuxt.$router);
-        $nuxt.$router.push({ name: "首頁" });
+        routeTo("首頁");
         return;
       }
-
-      console.log("ggg");
-
       const message = _.get(error, "response.data.status.message");
 
       if (message) {
