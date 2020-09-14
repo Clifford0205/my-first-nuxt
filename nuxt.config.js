@@ -49,7 +49,8 @@ export default {
     "~plugins/core-components.js",
     "~plugins/date-filter.js",
     "~plugins/axios.js",
-    "~/plugins/font-awesome"
+    "~/plugins/font-awesome",
+    "~/plugins/context.js"
   ],
   /*
    ** Auto import components
@@ -80,7 +81,7 @@ export default {
 
   router: {
     linkActiveClass: "active",
-    middleware: "log",
+    middleware: ["check-auth"],
     extendRoutes(routes, resolve) {
       routes.push(
         {
