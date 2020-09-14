@@ -21,6 +21,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  name: "admin",
   // layout: "admin",
   middleware: ["check-auth", "auth"],
   computed: { ...mapGetters(["loadedPosts"]) },

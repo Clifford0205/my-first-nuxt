@@ -114,7 +114,7 @@ export default ({ method, url, config, displayLoading, baseURL, context }) => {
 
       if (status == 400) {
         console.log($nuxt.$router);
-        $nuxt.$router.push("/");
+        $nuxt.$router.push({ name: "首頁" });
         return;
       }
 

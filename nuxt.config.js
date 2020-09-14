@@ -80,7 +80,14 @@ export default {
 
   router: {
     linkActiveClass: "active",
-    middleware: "log"
+    middleware: "log",
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: "首頁",
+        path: "/",
+        component: resolve(__dirname, "pages/index.vue")
+      });
+    }
   },
 
   pageTransition: {
