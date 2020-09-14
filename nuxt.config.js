@@ -37,7 +37,10 @@ export default {
   /*
    ** Global CSS
    */
-  css: [{ src: "~/assets/styles/main.scss", lang: "scss" }],
+  css: [
+    { src: "~/assets/styles/main.scss", lang: "scss" }
+    // { src: "~/fortawesome/fontawesome-free/css/all.css" }
+  ],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -45,7 +48,8 @@ export default {
   plugins: [
     "~plugins/core-components.js",
     "~plugins/date-filter.js",
-    "~plugins/axios.js"
+    "~plugins/axios.js",
+    "~/plugins/font-awesome"
   ],
   /*
    ** Auto import components
