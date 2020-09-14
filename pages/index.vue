@@ -16,7 +16,7 @@ export default {
 
   fetch(context) {
     return postApi
-      .getAllPost(context)
+      .getAllPost()
       .then(res => {
         const postsArray = [];
         for (const key in res) {

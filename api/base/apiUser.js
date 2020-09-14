@@ -7,11 +7,14 @@ export default ({
   displayLoading = true,
   baseURL
 }) => {
+  let context = globalContext;
+
   return api({
     method,
     url,
     config,
     displayLoading,
-    baseURL
+    baseURL,
+    context
   });
 };

@@ -1,18 +1,7 @@
-// import store from "~store";
-// import router from "~router";
-import Vue from "vue";
-
-export default ({ context, headers = {} }) => {
-  let authorization;
-  console.log(globalContext.store.getters);
+export default (headers = {}) => {
+  let authorization = globalContext.store.getters["user/token"];
+  // console.log(globalContext.store.getters);
   console.log(globalContext.store.getters["user/token"]);
-
-  if (process.server) {
-    authorization = context.store.getters["user/token"];
-  }
-  if (process.client) {
-    authorization = $nuxt.$store.getters["user/token"];
-  }
 
   return {
     headers: {
