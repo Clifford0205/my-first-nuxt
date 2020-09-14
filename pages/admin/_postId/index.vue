@@ -44,7 +44,7 @@ export default {
     ...mapActions(["editPost"]),
     onSubmitted(editedPost) {
       this.editPost(editedPost).then(() => {
-        this.$router.push("/admin");
+        this.$router.push({ name: "會員頁" });
       });
     }
   }

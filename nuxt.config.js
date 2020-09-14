@@ -92,6 +92,11 @@ export default {
           name: "會員頁",
           path: "/admin",
           component: resolve(__dirname, "pages/admin/index.vue")
+        },
+        {
+          name: "會員登入頁",
+          path: "/admin/auth",
+          component: resolve(__dirname, "pages/admin/auth/index.vue")
         }
       );
     }

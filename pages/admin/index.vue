@@ -29,7 +29,7 @@ export default {
     ...mapActions("user", ["logout"]),
     onLogout() {
       this.logout();
-      this.$router.push("/admin/auth");
+      this.$router.push({ name: "會員登入頁" });
     }
   }
 };

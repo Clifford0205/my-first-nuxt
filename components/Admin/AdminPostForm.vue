@@ -57,7 +57,7 @@ export default {
     },
     onCancel() {
       // Navigate back
-      this.$router.push({ name: "admin" });
+      this.$router.push({ name: "會員頁" });
     }
   }
 };
