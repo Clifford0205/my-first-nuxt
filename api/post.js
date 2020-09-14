@@ -9,7 +9,7 @@ export default {
     });
   },
 
-  getOnePost({ postId,context }) {
+  getOnePost({ postId, context }) {
     return callApi({
       url: `/posts/${postId}.json`,
       method: "get",
@@ -32,7 +32,6 @@ export default {
   },
 
   editPost({ post, userToken }) {
-    console.log(post);
     const config = {
       data: {
         ...post

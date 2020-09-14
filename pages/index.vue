@@ -11,7 +11,8 @@
 import { mapGetters } from "vuex";
 
 export default {
-  computed: { ...mapGetters(["loadedPosts"]) }
+  computed: { ...mapGetters(["loadedPosts"]) },
+
   // computed: {
   //   loadedPosts() {
   //     return this.$store.getters.loadedPosts;

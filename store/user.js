@@ -49,6 +49,10 @@ export const actions = {
         authUrl
       })
       .then(res => {
+        console.log(res);
+        if (res) {
+          $nuxt.$router.push("/admin");
+        }
         vuexContext.commit("setToken", res.idToken);
         setTokenOnWeb(res.idToken);
         setExpirationDateOnWeb(
@@ -59,7 +63,12 @@ export const actions = {
           data: "Authenticated!"
         });
       })
-      .catch(e => console.log(e));
+      .catch(e => {
+        console.log(e);
+        console.log($nuxt.$router);
+        console.log($nuxt._router);
+        // $nuxt.$router.push({ name: "index" });
+      });
   },
 
   initAuth(vuexContext, req) {

@@ -58,10 +58,10 @@ const debounceErrorAlert = _.debounce(() => {
 
 export default ({ method, url, config, displayLoading, baseURL, context }) => {
   if (process.server) {
-    console.log(context.route);
+    // console.log(context.route);
   }
   if (process.client) {
-    console.log($nuxt.$router);
+    // console.log($nuxt.$router);
   }
   let isStillGetting = _.get(apiStatus, url, false);
 
@@ -104,18 +104,21 @@ export default ({ method, url, config, displayLoading, baseURL, context }) => {
       toggleLoading(false, displayLoading);
 
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error(error.response);
 
       const status = _.get(error, "response.status");
 
       const code = _.get(error, "response.data.status.code");
 
-      console.log(error);
+      console.log(status);
 
-      if (status == 401) {
-        $nuxt.$router.push("index");
+      if (status == 400) {
+        console.log($nuxt.$router);
+        $nuxt.$router.push("/");
         return;
       }
+
+      console.log("ggg");
 
       const message = _.get(error, "response.data.status.message");
 
