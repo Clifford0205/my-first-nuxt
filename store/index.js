@@ -23,20 +23,20 @@ export const mutations = {
 };
 
 export const actions = {
-  nuxtServerInit(vuexContext, context) {
-    return postApi
-      .getAllPost(context)
-      .then(res => {
-        const postsArray = [];
-        for (const key in res) {
-          // console.log("res.data", res.data);
-          // console.log("key", key);
-          postsArray.push({ ...res[key], id: key });
-        }
-        vuexContext.commit("setPosts", postsArray);
-      })
-      .catch(e => context.error(e));
-  },
+  // nuxtServerInit(vuexContext, context) {
+  //   return postApi
+  //     .getAllPost(context)
+  //     .then(res => {
+  //       const postsArray = [];
+  //       for (const key in res) {
+  //         // console.log("res.data", res.data);
+  //         // console.log("key", key);
+  //         postsArray.push({ ...res[key], id: key });
+  //       }
+  //       vuexContext.commit("setPosts", postsArray);
+  //     })
+  //     .catch(e => context.error(e));
+  // },
 
   addPost(vuexContext, post) {
     return postApi

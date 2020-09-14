@@ -6,8 +6,25 @@
 
 <script>
 import { mapGetters } from "vuex";
+import postApi from "@/api/post";
 
 export default {
+  fetch(context) {
+    return postApi
+      .getAllPost(context)
+      .then(res => {
+        const postsArray = [];
+        for (const key in res) {
+          // console.log("res.data", res.data);
+          // console.log("key", key);
+          postsArray.push({ ...res[key], id: key });
+        }
+        context.store.commit("setPosts", postsArray);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  },
   // fetch(context) {
   //   return new Promise((resolve, reject) => {
   //     setTimeout(() => {

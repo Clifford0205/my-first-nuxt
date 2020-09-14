@@ -19,11 +19,29 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import postApi from "@/api/post";
 
 export default {
   name: "admin",
   // layout: "admin",
   middleware: ["check-auth", "auth"],
+  fetch(context) {
+    return postApi
+      .getAllPost(context)
+      .then(res => {
+        const postsArray = [];
+        for (const key in res) {
+          // console.log("res.data", res.data);
+          // console.log("key", key);
+          postsArray.push({ ...res[key], id: key });
+        }
+        context.store.commit("setPosts", postsArray);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  },
+
   computed: { ...mapGetters(["loadedPosts"]) },
   methods: {
     ...mapActions("user", ["logout"]),
