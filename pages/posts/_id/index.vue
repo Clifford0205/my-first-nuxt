@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style scoped>
-.single-post-page {
+/* .single-post-page {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
@@ -92,5 +92,5 @@ export default {
 .post-feedback a:hover,
 .post-feedback a:active {
   color: salmon;
-}
+} */
 </style>
