@@ -63,10 +63,14 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios"],
-  axios: {
-    // baseURL: process.env.BASE_URL || "https://nuxt-blog-9ecf3.firebaseio.com",
-    credentials: false
+  modules: ["@nuxtjs/axios", "bootstrap-vue/nuxt"],
+  // axios: {
+  //   baseURL: process.env.BASE_URL || "https://nuxt-blog-9ecf3.firebaseio.com",
+  //   credentials: false
+  // },
+  bootstrapVue: {
+    bootstrapCSS: true, // Or `css: false`
+    bootstrapVueCSS: true // Or `bvCSS: false`
   },
   /*
    ** Build configuration
