@@ -64,7 +64,6 @@ export const actions = {
         userToken: vuexContext.state.user.token
       })
       .then(res => {
-        console.log(res);
         vuexContext.commit("editPost", editedPost);
       })
       .catch(err => console.log(err));

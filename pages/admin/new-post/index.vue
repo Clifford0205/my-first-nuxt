@@ -21,7 +21,7 @@ export default {
 
     onSubmitted(postData) {
       this.addPost(postData).then(() => {
-        this.$router.push({ name: "會員頁面" });
+        this.$router.push({ name: "會員頁" });
       });
       // this.$store.dispatch("addPost", postData).then(() => {
       //   this.$router.push("/admin");

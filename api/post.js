@@ -1,19 +1,17 @@
 import callApi from "./base/api";
 
 export default {
-  getAllPost(context) {
+  getAllPost() {
     return callApi({
       url: `/posts.json`,
-      method: "get",
-      context
+      method: "get"
     });
   },
 
-  getOnePost({ postId, context }) {
+  getOnePost({ postId }) {
     return callApi({
       url: `/posts/${postId}.json`,
-      method: "get",
-      context
+      method: "get"
     });
   },
 

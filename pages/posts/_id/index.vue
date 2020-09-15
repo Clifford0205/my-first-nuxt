@@ -26,8 +26,7 @@ export default {
   asyncData(context) {
     return postApi
       .getOnePost({
-        postId: context.params.id,
-        context
+        postId: context.params.id
       })
       .then(res => {
         return {
