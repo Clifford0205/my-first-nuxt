@@ -49,7 +49,8 @@ export default {
     "~plugins/core-components.js",
     "~plugins/date-filter.js",
     "~/plugins/font-awesome",
-    "~/plugins/context.js"
+    "~/plugins/context.js",
+    { ssr: false, src: "~/plugins/validate/vee-validate.js" }
   ],
   /*
    ** Auto import components

@@ -21,6 +21,10 @@
           <li class="nav-item">
             <nuxt-link :to="{ name: 'bs-test' }">Bootstrap</nuxt-link>
           </li>
+
+          <li class="nav-item">
+            <nuxt-link :to="{ name: 'validate' }">validate</nuxt-link>
+          </li>
         </ul>
       </div>
     </header>
